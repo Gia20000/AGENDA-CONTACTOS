@@ -1,3 +1,65 @@
 <script>
-    
+    function crearTablaContactos()
+    {
+        let tabla = document.getElementById('tablaContactos');
+                if (tabla) tabla.remove();
+        google.script.run.withSuccessHandler(
+            function(obj)
+            {
+                
+                 tabla = document.createElement('table');
+                tabla.id = "tablaContactos";
+                let tablaHeader= document.createElement('thead');
+                let tablaBody= document.createElement('tbody');
+
+                for (let i = 0 ; i< obj.length;i++){
+                    let fila = document.createElement('tr');
+                    //recorro c7u de las celdas de cada fila
+                    for (let j= 0 ; j< obj[i].length;j++){
+                        let celda = document.createElement('td');
+                       celda.textContent = obj[i][j];
+                        //agrega las celdas a la fila
+                        fila.appendChild(celda);
+
+                }
+                if(i==0)
+                    {
+                        tablaHeader.appendChild(fila);
+                        tabla.appendChild(tablaHeader);
+                    }else{
+                    //inserto en el body las filas q ya tendra en c/u las celdas
+                    tablaBody.appendChild(fila);
+                    }
+            }
+// //bucle recorre c7u de las filas y x c/u de las filas
+//                 Array.from(obj).forEach((filaActual, i) =>
+//                 {
+//                     let fila = document.createElement('tr');
+//                     filaActual.forEach(celdaActual =>
+//                     {
+// // tenemos un bucle q recorre c/u de las celdas
+//                         let celda = document.createElement('td');
+//                         celda.textContent = celdaActual;
+//     // agrega las celdas a la fila
+//                         fila.appendChild(celda);
+//                     });
+//                     if(i==0)
+//                     {
+//                         tablaHeader.appendChild(fila);
+//                         tabla.appendChild(tablaHeader);
+//                     }else{
+//                     //inserto en el body las filas q ya tendra en c/u las celdas
+//                     tablaBody.appendChild(fila);
+//                     }
+//                 });
+//                 //agregamos el body a la tabla
+//                 tabla.appendChild(tablaBody);
+//                 //alternamos colores y agregamos clases
+//                 tabla.classList.add('table', 'table-striped','border','border-3','table-success');
+                tablaHeader.classList.add('table-dark')
+                //agregamos la tabla ala pagina
+document.getElementById('divContactos').appendChild(tabla);
+            }
+        ).obtenerContactos();
+    }
 </script>
