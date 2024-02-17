@@ -11,26 +11,32 @@
                 tabla.id = "tablaContactos";
                 let tablaHeader= document.createElement('thead');
                 let tablaBody= document.createElement('tbody');
-
-                for (let i = 0 ; i< obj.length;i++){
+            //Header
+            let primeraFila = document.createElement('tr');  
+            for (let i = 0 ; i< obj[0].length;i++)
+            {
+                let celda = document.createElement('td');
+                       celda.textContent = obj[0][j];                      
+                        primeraFila.appendChild(celda);
+            }
+            tablaHeader.appendChild(primeraFila);
+            tabla.appendChild(tablaHeader);
+//Body de la tabla
+                for (let i = 1 ; i< obj.length;i++)
+                {
                     let fila = document.createElement('tr');
                     //recorro c7u de las celdas de cada fila
                     for (let j= 0 ; j< obj[i].length;j++){
                         let celda = document.createElement('td');
-                       celda.textContent = obj[i][j];
+                        celda.textContent = obj[i][j];
                         //agrega las celdas a la fila
                         fila.appendChild(celda);
 
                 }
-                if(i==0)
-                    {
-                        tablaHeader.appendChild(fila);
-                        tabla.appendChild(tablaHeader);
-                    }else{
-                    //inserto en el body las filas q ya tendra en c/u las celdas
+                
                     tablaBody.appendChild(fila);
                     }
-            }
+            
 // //bucle recorre c7u de las filas y x c/u de las filas
 //                 Array.from(obj).forEach((filaActual, i) =>
 //                 {
